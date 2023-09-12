@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Form
 from typing import Optional, List
 from pydantic import BaseModel
 
@@ -18,6 +18,11 @@ store_todo = [
 @app.get('/todos/', response_model=List[Todo])
 async def get_all_todos():
     return store_todo
+
+@app.post('/login/')
+async def login(username: str = Form(...), password: str = Form(...)):
+    return {'username': username}
+
 
 @app.get('/')
 async def home():
